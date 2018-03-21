@@ -1,0 +1,53 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Задачи</h1>
+
+<table>
+  <thead>
+  
+  </thead>
+
+  <tbody>
+   <br> </br>
+    <% @projects.each do |project| %>
+				<tr> 
+				
+			<h2><%= project.title %></h2>
+			
+			 <% project.todos.each do |todo| %>
+				
+				
+					<li><%= todo.text %> </li>
+				
+				
+			<% end %>
+	  
+    <% end %>
+	
+	<h1>Новая Задача</h1>
+	<%= form_for(@todo) do |form| %>
+  <p>	
+   
+	
+    <%= form.text_field :text,  :placeholder => 'название задачи' %>
+	
+    </p>	
+  <p>
+   
+	 <%= form.select :project_id, options_for_select(Project.all.map{|p|[p.title, p.id]}) %>
+	
+  </p>	
+	 
+  <p>
+  
+	 <%=link_to "ОТМЕНА" %>
+	 <%=link_to "OK" %>
+	 <%=form.submit "СОЗДАТЬ"%>
+	 
+  </p>
+  
+<% end %>
+  </tbody>
+</table>	
+
+
